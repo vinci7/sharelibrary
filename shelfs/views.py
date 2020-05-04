@@ -37,6 +37,20 @@ def logout(request):
     return redirect("login")
 
 
+@login_required
+def shelf(request):
+    template = loader.get_template('shelf.html')
+    return HttpResponse(template.render(None, request))
+
+@login_required
+def profile(request):
+    template = loader.get_template('profile.html')
+    return HttpResponse(template.render(None, request))
+
+@login_required
+def isbn(request):
+    template = loader.get_template('isbn.html')
+    return HttpResponse(template.render(None, request))
 
 def ping(request):
     return HttpResponse("pong")

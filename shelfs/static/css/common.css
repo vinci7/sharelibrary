@@ -1,3 +1,28 @@
+body{
+  --douban_yellow: #ffc160;
+}
+
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
+}
+
+.book {
+  display: inline-block;
+  margin: 10px 15px;
+}
+
+.book > .title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 130px;
+}
+
+.rating-star {
+  display: flex;
+}
+
+.rating-star > img{
+  width: 20px;
+  height: 20px;
 }

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+  Home
+{% endblock title %}
+
+{% block custom_import %}
+<link rel="stylesheet" href="{% static 'css/common.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock custom_import %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<div class="container">
+
+  <br/>
+	<h4>Profile</h4>
+  <br/><br/><br/>
+
+  <div class="row">
+    <label for="number"class="col-1"><b>Number</b></label>
+    <div class="col-2">
+      <span id="number">00001</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="nickname"class="col-1"><b>Nickname</b></label>
+    <div class="col-2">
+      <span id="nickname">Admin</span>
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock content %}

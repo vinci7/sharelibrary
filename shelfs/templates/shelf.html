@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    Share Library
+{% endblock title %}
+
+{% block custom_import %}
+	<link rel="stylesheet" href="{% static 'css/common.css' %}">
+  <link rel="stylesheet" href="{% static 'css/shelf.css' %}">
+{% endblock custom_import%}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<div class="container">
+
+  <br/>
+  <div class="shelf-title">
+	   <h4>xxx's Shelf</h4>
+     <a href="isbn">
+       <button class="btn btn-sm btn-info"><i class="fas fa-plus-circle"></i> Add</button>
+     </a>
+  </div>
+  <br/>
+
+  <a href="#"><button type="button" class="btn btn-sm btn-outline-info" style="user-select: auto;">文学</button></a>
+  <a href="#"><button type="button" class="btn btn-sm btn-outline-info" style="user-select: auto;">技术</button></a>
+  <a href="#"><button type="button" class="btn btn-sm btn-outline-info" style="user-select: auto;">经济</button></a>
+  <a href="#"><button type="button" class="btn btn-sm btn-outline-info" style="user-select: auto;">历史</button></a>
+  <a href="#"><button type="button" class="btn btn-sm btn-outline-info" style="user-select: auto;">哲学</button></a>
+
+
+</div>
+
+
+{% endblock content %}

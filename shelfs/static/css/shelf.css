@@ -1,0 +1,7 @@
+.shelf-title{
+  display: flex;
+}
+
+.shelf-title > a > button {
+  margin-left: 30px;
+}

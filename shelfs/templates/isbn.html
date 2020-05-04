@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+  Home
+{% endblock title %}
+
+{% block custom_import %}
+<link rel="stylesheet" href="{% static 'css/common.css' %}">
+<link rel="stylesheet" href="{% static 'css/isbn.css' %}">
+{% endblock custom_import %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<div class="container">
+
+<form action="{% url 'isbn' %}" method="post" class="form-isbn">
+{% csrf_token %}
+  <h1>ISBN</h1>
+  <input type="text" class="form-control" placeholder="isbn" name="isbn" required autofocus>
+  <br/>
+  <button class="btn btn-lg btn-info btn-block" type="submit">Add</button>
+</form>
+
+</div>
+
+{% endblock content %}
