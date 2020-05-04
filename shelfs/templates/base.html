@@ -1,0 +1,53 @@
+<!-- 载入静态文件 -->
+{% load static %}
+
+<!DOCTYPE html>
+<!-- 网站主语言 -->
+<html lang="zh-CN">
+
+<head>
+    <!-- 网站采用的字符编码 -->
+    <meta charset="utf-8">
+
+    <!-- 适配移动设备屏幕 -->
+    <meta name="viewport" content="width=device-width">
+
+    <!-- 网站icon -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- 预留网站标题的位置 -->
+    <title>{% block title %}{% endblock title%}</title>
+
+    <!-- 引入bootstrap的css文件 -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <!-- 引用footawesome的icon -->
+    <script src="https://kit.fontawesome.com/7f9cfedc64.js" crossorigin="anonymous"></script>
+
+    {% block custom_import %}{% endblock custom_import%}
+</head>
+
+<body>
+    <!-- 引入导航栏 -->
+    {% include 'header.html' %}
+    <!-- 显示 Django message -->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- 预留具体页面的位置 -->
+    {% block content %}{% endblock content %}
+    <!-- 引入注脚 -->
+    {% include 'footer.html' %}
+    <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
+    <script src="{% static 'jquery/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'popper/popper-2.0.6.js' %}"></script>
+    <!-- 引入bootstrap的js文件 -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    {%block custom_script%}{%endblock custom_script%}
+</body>
+
+</html>
