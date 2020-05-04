@@ -52,5 +52,8 @@ def isbn(request):
     template = loader.get_template('isbn.html')
     return HttpResponse(template.render(None, request))
 
+def get_by_isbn(request, isbn):
+    return HttpResponse(isbn)
+
 def ping(request):
     return HttpResponse("pong")
