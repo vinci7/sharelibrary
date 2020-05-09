@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'shelfs.apps.ShelfsConfig',
+    'shelfs.templatetags',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,3 +124,7 @@ STATIC_URL = '/static/'
 
 # login url redirect unauth user
 LOGIN_URL  = 'login'
+
+# imgur config
+CLIENT_ID = '67898fe8733ce92'
+CLIENT_SECRET = '0254da2b8dbc857552b7561a8ac5b65127df199b'

@@ -5,12 +5,19 @@ from django.template import loader
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
+from .models import Book
+from . import utils
+
 # Create your views here.
 
 @login_required
 def index(request):
+    books = Book.objects.values_list('title', 'tags', 'author', 'url', 'douban_small_image_url', 'image_url', 'rating_average', 'rating_number', named=True)
+    context = {
+        'books': books,
+    }
     template = loader.get_template('index.html')
-    return HttpResponse(template.render(None, request))
+    return HttpResponse(template.render(context, request))
 
 
 def login(request):
@@ -49,11 +56,20 @@ def profile(request):
 
 @login_required
 def isbn(request):
-    template = loader.get_template('isbn.html')
-    return HttpResponse(template.render(None, request))
+    if request.method == 'GET':
+        template = loader.get_template('isbn.html')
+        return HttpResponse(template.render(None, request))
+    elif request.method == 'POST':
+        isbn = request.POST['isbn']
+        if utils.get_by_isbn(isbn) != None:
+            messages.add_message(request, messages.SUCCESS, 'add success')
+            return redirect("isbn")
+        else:
+            messages.add_message(request, messages.ERROR, 'add failed')
+            return redirect("isbn")
 
 def get_by_isbn(request, isbn):
-    return HttpResponse(isbn)
+    return HttpResponse(utils.get_by_isbn(isbn))
 
 def ping(request):
     return HttpResponse("pong")
