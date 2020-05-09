@@ -12,7 +12,14 @@ from . import utils
 
 @login_required
 def index(request):
-    books = Book.objects.values_list('title', 'tags', 'author', 'url', 'douban_small_image_url', 'image_url', 'rating_average', 'rating_number', named=True)
+    books = Book.objects.values('title', 'tags', 'author', 'url', 'douban_small_image_url', 'rating_average', 'rating_number')
+    for book in books:
+        showStar = {
+            'full': round(book['rating_average']/10)//2,
+            'half': round(book['rating_average']/10) % 2,
+            'empty': 5 - (round(book['rating_average']/10)//2 + round(book['rating_average']/10) % 2)
+        }
+        book['showStar'] = showStar
     context = {
         'books': books,
     }
