@@ -35,7 +35,7 @@
   {% for book in books %}
   <div class="book">
     <div>
-      <img width="130px" src="{{ book.image_url|default:book.douban_small_image_url }}"/>
+      <img width="130px" src="{{ book.douban_small_image_url }}" referrerpolicy ="never"/>
     </div>
     <div class="title">
       <span>{{ book.title }}</span>

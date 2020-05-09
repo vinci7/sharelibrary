@@ -1,7 +1,7 @@
 import requests
 import json
-from django.conf import settings
-from imgurpython import ImgurClient
+#from django.conf import settings
+#from imgurpython import ImgurClient
 import logging
 
 from .models import Book
@@ -28,13 +28,13 @@ def get_by_isbn(isbn):
         book = Book()
         book.bind(bookDict)
 
-        if 'images' in bookDict:
-            if 'small' in bookDict['images']:
-                book.image_url = upload_image(bookDict['images']['small'])
-            else:
-                return None
-        else:
-            return None 
+        # if 'images' in bookDict:
+        #     if 'small' in bookDict['images']:
+        #         book.image_url = upload_image(bookDict['images']['small'])
+        #     else:
+        #         return None
+        # else:
+        #     return None 
         
         book.save()
 
@@ -55,17 +55,17 @@ def request_api(isbn):
             continue
     return None
 
-def upload_image(url):
-    try:
-        client = ImgurClient(settings.CLIENT_ID, settings.CLIENT_SECRET)
-        result = client.upload_from_url(url, config=None, anon=True)
-    except Exception as e:
-        logging.warning(e)
-        return ""
+# def upload_image(url):
+#     try:
+#         client = ImgurClient(settings.CLIENT_ID, settings.CLIENT_SECRET)
+#         result = client.upload_from_url(url, config=None, anon=True)
+#     except Exception as e:
+#         logging.warning(e)
+#         return ""
     
-    if 'link' in result:
-        uploaded_url = result['link']
-    else:
-        return ""
+#     if 'link' in result:
+#         uploaded_url = result['link']
+#     else:
+#         return ""
     
-    return uploaded_url
+#     return uploaded_url
