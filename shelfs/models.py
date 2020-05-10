@@ -1,5 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    area = models.CharField(max_length=100)
+    station = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return '{} ({})'.format(self.user.username, self.area)
 
 class Book(models.Model):
     douban_book_id = models.IntegerField(null=False)
@@ -22,6 +31,7 @@ class Book(models.Model):
     summary = models.TextField()
     price = models.CharField(max_length=15, default="")
     pages = models.IntegerField(default=0)
+    owners = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -63,20 +63,23 @@ def profile(request):
 
 @login_required
 def isbn(request):
+    user = request.user
     if request.method == 'GET':
         template = loader.get_template('isbn.html')
         return HttpResponse(template.render(None, request))
     elif request.method == 'POST':
         isbn = request.POST['isbn']
-        if utils.get_by_isbn(isbn) != None:
+        if utils.get_by_isbn(user, isbn) != None:
             messages.add_message(request, messages.SUCCESS, 'add success')
             return redirect("isbn")
         else:
             messages.add_message(request, messages.ERROR, 'add failed')
             return redirect("isbn")
 
+@login_required
 def get_by_isbn(request, isbn):
-    return HttpResponse(utils.get_by_isbn(isbn))
+    user = request.user
+    return HttpResponse(utils.get_by_isbn(user, isbn))
 
 def ping(request):
     return HttpResponse("pong")

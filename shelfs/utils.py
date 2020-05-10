@@ -17,7 +17,7 @@ PROXY_POOL = [
 HEADERS = {'User-Agent':'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Mobile Safari/537.36'}
 ENDPOINT = '/v2/book/isbn/'
 
-def get_by_isbn(isbn):
+def get_by_isbn(user, isbn):
 
     try:
         book = Book.objects.get(isbn13 = isbn)
@@ -37,6 +37,8 @@ def get_by_isbn(isbn):
         #     return None 
         
         book.save()
+    
+    book.owners.add(user)
 
     return book
 
