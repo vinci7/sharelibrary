@@ -25,7 +25,7 @@ SECRET_KEY = 'hb-2r3i)0^t6_-^r=bbx*t)7k%5*t$7e=jff2=d5g*^w0ruow#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -125,6 +125,15 @@ STATIC_URL = '/static/'
 # login url redirect unauth user
 LOGIN_URL  = 'login'
 
-# imgur config
-# CLIENT_ID = '67898fe8733ce92'
-# CLIENT_SECRET = '0254da2b8dbc857552b7561a8ac5b65127df199b'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'shelfs/static'),
+)
+
+# login url redirect unauth user 
+LOGIN_URL  = 'login'
