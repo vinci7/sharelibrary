@@ -5,7 +5,7 @@ from django.template import loader
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
-from .models import Book
+from .models import Book, UserProfile
 from . import utils
 
 # Create your views here.
@@ -71,8 +71,6 @@ def book(request, isbn):
         book = Book.objects.get(isbn13 = isbn)
     except Book.DoesNotExist:
         raise Http404("Book does not exist.")
-    
-    print(book.rating_average)
 
     showStar = {
         'full': round(book.rating_average/10)//2,
@@ -80,11 +78,14 @@ def book(request, isbn):
         'empty': 5 - (round(book.rating_average/10)//2 + round(book.rating_average/10) % 2)
     }
     book.showStar = showStar
+    owners = book.owners.all()
 
     context = {
         'user': request.user,
         'book': book,
+        'owners': owners,
     }
+    
     return HttpResponse(template.render(context, request))
 
 
@@ -109,4 +110,10 @@ def get_by_isbn(request, isbn):
     return HttpResponse(utils.get_by_isbn(user, isbn))
 
 def ping(request):
+    user = request.user
+    print(user)
+    print(user.id)
+    print(type(user))
+    user = UserProfile.objects.get(id = user.id)
+    print(user)
     return HttpResponse("pong")
