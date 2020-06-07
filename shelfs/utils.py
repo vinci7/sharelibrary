@@ -3,8 +3,9 @@ import json
 #from django.conf import settings
 #from imgurpython import ImgurClient
 import logging
+from django.contrib.auth.models import User
 
-from .models import Book, UserProfile
+from .models import Book
 
 PROXY_POOL = [
     'https://douban.uieee.com',
@@ -37,8 +38,8 @@ def get_by_isbn(user, isbn):
         #     return None 
         
         book.save()
-    up = UserProfile.objects.get(id = user.id)
-    book.owners.add(up)
+    user = User.objects.get(id = user.id)
+    book.owners.add(user)
 
     return book
 

@@ -55,7 +55,10 @@ def logout(request):
 @login_required
 def shelf(request):
     template = loader.get_template('shelf.html')
-    return HttpResponse(template.render(None, request))
+    context = {
+        'user': request.user,
+    }
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def profile(request):
