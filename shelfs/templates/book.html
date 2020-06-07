@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+  Detail
+{% endblock title %}
+
+{% block custom_import %}
+<link rel="stylesheet" href="{% static 'css/common.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock custom_import %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 载入custom filter: divide -->
+{% load shelfs_extras %}
+
+<div class="container">
+
+  <br/>
+	<h4>Detail</h4>
+  <br/><br/><br/>
+
+  <div class="row">
+  <div class="col-md-4">
+    <div class="book">
+      <div>
+        <img width="130px" src="{{ book.douban_small_image_url }}" referrerpolicy ="never"/>
+      </div>
+      <div class="title">
+        <span>{{ book.title }}</span>
+      </div>
+      <div class="rating-star">
+    
+        {% with ''|center:book.showStar.full as range %}
+        {% for _ in range %}
+        <span style="color: var(--douban_yellow);">
+          <i class="fa fa-star" aria-hidden="true"></i>
+        </span>
+        {% endfor %%}
+        {% endwith %}
+
+        {% with ''|center:book.showStar.half as range %}
+        {% for _ in range %}
+        <span style="color: var(--douban_yellow);">
+          <i class="fa fa-star-half-alt" aria-hidden="true"></i>
+        </span>
+        {% endfor %%}
+        {% endwith %}
+
+        {% with ''|center:book.showStar.empty as range %}
+        {% for _ in range %}
+        <span style="color: var(--douban_yellow);">
+          <i class="far fa-star" aria-hidden="true"></i>
+        </span>
+        {% endfor %%}
+        {% endwith %}
+        
+        <span>&nbsp{{ book.rating_average|divide:10 }}</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8" style="margin-top: 10px;">
+    <div class="row">
+      <label for="title" class="col-2"><b>标题</b></label>
+      <div class="col-10">
+        <span id="title">{{ book.title }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="subtitle" class="col-2"><b>副标题</b></label>
+      <div class="col-10">
+        <span id="subtitle"">{{ book.subtitle }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="author" class="col-2"><b>作者</b></label>
+      <div class="col-10">
+        <span id="author">{{ book.author }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="publisher" class="col-2"><b>出版者</b></label>
+      <div class="col-10">
+        <span id="publisher">{{ book.publisher }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="pubdate" class="col-2"><b>出版年</b></label>
+      <div class="col-10">
+        <span id="pubdate">{{ book.pubdate }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="pages" class="col-2"><b>页数</b></label>
+      <div class="col-10">
+        <span id="pages">{{ book.pages }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="price" class="col-2"><b>定价</b></label>
+      <div class="col-10">
+        <span id="price">{{ book.price }}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="isbn13" class="col-2"><b>ISBN</b></label>
+      <div class="col-10">
+        <span id="isbn13">{{ book.isbn13 }}</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+{% endblock content %}

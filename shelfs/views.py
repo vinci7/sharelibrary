@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template import loader
 
 from django.contrib import messages, auth
@@ -12,7 +12,7 @@ from . import utils
 
 @login_required
 def index(request):
-    books = Book.objects.values('title', 'tags', 'author', 'url', 'douban_small_image_url', 'rating_average', 'rating_number')
+    books = Book.objects.values('title', 'tags', 'author', 'url', 'douban_small_image_url', 'rating_average', 'rating_number', 'isbn13')
     for book in books:
         showStar = {
             'full': round(book['rating_average']/10)//2,
@@ -61,6 +61,29 @@ def profile(request):
     template = loader.get_template('profile.html')
     context = {
         'user': request.user,
+    }
+    return HttpResponse(template.render(context, request))
+
+@login_required
+def book(request, isbn):
+    template = loader.get_template('book.html')
+    try:
+        book = Book.objects.get(isbn13 = isbn)
+    except Book.DoesNotExist:
+        raise Http404("Book does not exist.")
+    
+    print(book.rating_average)
+
+    showStar = {
+        'full': round(book.rating_average/10)//2,
+        'half': round(book.rating_average/10) % 2,
+        'empty': 5 - (round(book.rating_average/10)//2 + round(book.rating_average/10) % 2)
+    }
+    book.showStar = showStar
+
+    context = {
+        'user': request.user,
+        'book': book,
     }
     return HttpResponse(template.render(context, request))
 
