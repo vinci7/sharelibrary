@@ -59,7 +59,11 @@ def shelf(request):
 @login_required
 def profile(request):
     template = loader.get_template('profile.html')
-    return HttpResponse(template.render(None, request))
+    context = {
+        'user': request.user,
+    }
+    return HttpResponse(template.render(context, request))
+
 
 @login_required
 def isbn(request):
