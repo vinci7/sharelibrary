@@ -22,37 +22,55 @@
   <br/><br/><br/>
 
   <div class="row">
-    <label for="number"class="col-1"><b>Number</b></label>
-    <div class="col-2">
-      <span id="number">{{ user.id }}</span>
-    </div>
-  </div>
+    <div class="col-md-3">
+      <div class="row">
+        <label for="number"class="col-6"><b>Number</b></label>
+        <div class="col-6">
+          <span id="number">{{ user.id }}</span>
+        </div>
+      </div>
 
-  <div class="row">
-    <label for="username"class="col-1"><b>Username</b></label>
-    <div class="col-2">
-      <span id="username"">{{ user.username }}</span>
-    </div>
-  </div>
+      <div class="row">
+        <label for="username"class="col-6"><b>Username</b></label>
+        <div class="col-6">
+          <span id="username"">{{ user.username }}</span>
+        </div>
+      </div>
 
-  <div class="row">
-    <label for="email"class="col-1"><b>Email</b></label>
-    <div class="col-2">
-      <span id="email">{{ user.email }}</span>
-    </div>
-  </div>
+      <div class="row">
+        <label for="email"class="col-6"><b>Email</b></label>
+        <div class="col-6">
+          <span id="email">{{ user.email }}</span>
+        </div>
+      </div>
 
-  <div class="row">
-    <label for="area"class="col-1"><b>Area</b></label>
-    <div class="col-2">
-      <span id="area">{{ user.userprofile.area }}</span>
-    </div>
-  </div>
+      <div class="row">
+        <label for="area"class="col-6"><b>Area</b></label>
+        <div class="col-6">
+          <span id="area">{{ user.userprofile.area }}</span>
+        </div>
+      </div>
 
-  <div class="row">
-    <label for="station"class="col-1"><b>Station</b></label>
-    <div class="col-2">
-      <span id="station">{{ user.userprofile.station }}</span>
+      <div class="row">
+        <label for="station"class="col-6"><b>Station</b></label>
+        <div class="col-6">
+          <span id="station">{{ user.userprofile.station }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      {% for book in books %}
+      <div class="book">
+        <div>
+          <a href="{% url 'book' book.isbn13 %}">
+            <img width="130px" src="{{ book.douban_small_image_url }}" referrerpolicy ="never"/>
+          </a>
+        </div>
+        <div class="title">
+          <span>{{ book.title }}</span>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 

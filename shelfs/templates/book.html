@@ -135,12 +135,12 @@
         </tr>
         {% for owner in owners %}
         <tr>
-          <td>{{ owner.user.id }}</td>
+          <td>{{ owner.id }}</td>
           <td>
-            <a href="{% url 'profile_by_id' owner.user.id %}">{{ owner.user.username }}</a>
+            <a href="{% url 'profile_by_id' owner.id %}">{{ owner.username }}</a>
             </td>
-          <td>{{ owner.area }}</td>
-          <td>{{ owner.station }}</td>
+          <td>{{ owner.userprofile.area }}</td>
+          <td>{{ owner.userprofile.station }}</td>
         </tr>
         {% endfor %}
       </table>

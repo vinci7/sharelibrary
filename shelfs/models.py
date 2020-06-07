@@ -31,7 +31,7 @@ class Book(models.Model):
     summary = models.TextField()
     price = models.CharField(max_length=15, default="")
     pages = models.IntegerField(default=0)
-    owners = models.ManyToManyField(UserProfile)
+    owners = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

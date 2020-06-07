@@ -60,8 +60,11 @@ def shelf(request):
 @login_required
 def profile(request):
     template = loader.get_template('profile.html')
+    user = User.objects.get(id = request.user.id)
+    books = user.book_set.all()
     context = {
-        'user': request.user,
+        'user': user,
+        'books': books,
     }
     return HttpResponse(template.render(context, request))
 
@@ -70,10 +73,12 @@ def profile_by_id(request, id):
     template = loader.get_template('profile.html')
     try:
         user = User.objects.get(id = id)
+        books = user.book_set.all()
     except User.DoesNotExist:
         raise Http404("User does not exist.")
     context = {
         'user': user,
+        'books': books,
     }
     return HttpResponse(template.render(context, request))
 
