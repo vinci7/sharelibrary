@@ -4,6 +4,7 @@ from django.template import loader
 
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .models import Book, UserProfile
 from . import utils
@@ -63,6 +64,19 @@ def profile(request):
         'user': request.user,
     }
     return HttpResponse(template.render(context, request))
+
+@login_required
+def profile_by_id(request, id):
+    template = loader.get_template('profile.html')
+    try:
+        user = User.objects.get(id = id)
+    except User.DoesNotExist:
+        raise Http404("User does not exist.")
+    context = {
+        'user': user,
+    }
+    return HttpResponse(template.render(context, request))
+
 
 @login_required
 def book(request, isbn):

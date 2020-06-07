@@ -35,7 +35,7 @@
   {% for book in books %}
   <div class="book">
     <div>
-      <a href="book/{{ book.isbn13 }}">
+      <a href="{% url 'book' book.isbn13 %}">
         <img width="130px" src="{{ book.douban_small_image_url }}" referrerpolicy ="never"/>
       </a>
     </div>
