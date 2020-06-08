@@ -49,7 +49,12 @@ class Book(models.Model):
         self.douban_small_image_url = bookDict['images']['small']
         self.rating_number = bookDict['rating']['numRaters']
         self.rating_average = int(float(bookDict['rating']['average'])*10)
-        self.tags = bookDict['tags'][0]['title']
+        try:
+            self.tags = bookDict['tags'][0]['title']
+        except IndexError:
+            self.tags = ""
+        finally:
+            self.tags = ""
         self.isbn10 = bookDict['isbn10']
         self.isbn13 = bookDict['isbn13']
         self.url = bookDict['url']
